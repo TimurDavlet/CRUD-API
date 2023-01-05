@@ -9,26 +9,66 @@ MongoClient.connect(process.env.DB_CONN, function(err, db) {
 }); */
 
 import { createServer } from "http";
+import postHandler from "./postHendler.js";
+
+const db = [{id: 1, username: 'Test', age: 28, hobbies: []},];
 
 const server = createServer((request, response) => {
   let url = request.url
   let method = request.method
 
+  const getPosts = (request, response) => {
+    response.writeHead(200, { "Content-Type": "application/json" })
+    response.write(JSON.stringify(db))
+    response.end()
+  }
+
+  const putPosts = async (request, response) => {
+    /*
+    try {
+      // Getting url for request stream.
+      let url = request.url
+
+      // Js string function to split url
+      let idQuery = url.split("?")[1]
+      let idKey = idQuery.split("=")[0] // index of our DB array which will be id
+      let idValue = idQuery.split("=")[1] // Index Value
+
+      if (idKey === "id") {
+        // Calling bodyParser to get Data from request stream
+        await bodyParser(request)
+
+        // Appending Request body into provided index
+        db[idValue - 1] = request.body
+        response.writeHead(200, { "Content-Type": "application/json" })
+        response.write(JSON.stringify(db))
+        response.end()
+      } else {
+        response.writeHead(400, { "Content-type": "text/plain" })
+        response.write("Invalid Query")
+        response.end()
+      }
+    } catch (err) {
+      response.writeHead(400, { "Content-type": "text/plain" })
+      response.write("Invalid body data was provided", err.message)
+      response.end()
+    }
+  */
+  }
+
   switch (method) {
     case "GET":
-      if (url === "/") {
-        response.writeHead(200, { "Content-Type": "application/json" })
-        response.write(JSON.stringify({ message: "Hello World" }))
-        response.end()
+      if (url === "/api/users") {
+        getPosts(request, response)
       }
     break;
     case "POST":
-      if (url === "/post") {
-        response.writeHead(200, { "Content-Type": "application/json" });
-        response.write(JSON.stringify({ message: "Hello From Post" }));
-        response.end();
+      if (url === "/api/users") {
+        postHandler(request, response, db);
       }
     break;
+    putPosts(request, response)
+      break;
 
     default:
       response.writeHead(200, { "Content-Type": "text/plain" })
