@@ -5,7 +5,7 @@ const getPostId = (request, response, id) => {
     const result = db.filter(el => Number(el.id) === Number(id));
     if (result.length !== 0) {
       response.writeHead(200, { "Content-Type": "application/json" });
-      response.write(JSON.stringify(result));
+      response.write(JSON.stringify(result[0]));
       response.end();
     } else {
       response.writeHead(404, { "Content-Type": "text/plain" })
@@ -111,7 +111,7 @@ export const deletePosts = async (request, response, url) => {
             });
             if (elArrIndex !== null) {
                 db.splice(elArrIndex, 1);
-                response.writeHead(200, { "Content-Type": "application/json" });
+                response.writeHead(204, { "Content-Type": "text/plain" });
                 response.write("User delete");
                 response.end();
             } else {
