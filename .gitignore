@@ -4,6 +4,7 @@
 # dependencies
 /npm-cache
 /node_modules
+/dist
 
 # misc
 .DS_Store

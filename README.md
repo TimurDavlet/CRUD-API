@@ -9,10 +9,7 @@
 - npm install
 - npm run tests - запуск тестов
 - npm run start:dev - запуск сервера в режиме разработки
-- npm run start:prod - запуск сервера
-- npm run start:multi - запуск сервера (horizontal scaling for application)
-
-There could be implemented horizontal scaling for application (there is a npm script start:multi that starts multiple instances of your application using the Node.js Cluster API (equal to the number of logical processor cores on the host machine, each listening on port PORT + n) with a load balancer that distributes requests across them (using Round-robin algorithm). For example: host machine has 4 cores, PORT is 4000.
+- npm run start:prod - сборка и запуск сервера в режиме production
 
 ## API:
 - GET api/users is used to get all persons
@@ -27,4 +24,4 @@ There could be implemented horizontal scaling for application (there is a npm sc
 - age — user's age (number, required)
 - hobbies — user's hobbies (array of strings or empty array, required)
 
-Проект выполнен на ванильном node.js без использования фреймворков.
+Проект выполнен на node.js без использования фреймворков.
